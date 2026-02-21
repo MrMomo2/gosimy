@@ -107,11 +107,16 @@ export function Navbar({ locale }: { locale: string }) {
     setLocaleOpen(false);
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    setUserOpen(false);
-    router.push(`/${locale}`);
-    router.refresh();
+  const handleSignOut = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await supabase.auth.signOut();
+    } catch (err) {
+      console.error('Signout error:', err);
+    } finally {
+      setUserOpen(false);
+      window.location.href = `/${locale}`;
+    }
   };
 
   const avatarUrl = user?.user_metadata?.avatar_url;

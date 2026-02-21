@@ -11,12 +11,30 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always',
 });
 
+// Set to true to enable Maintenance / Coming Soon mode
+const IS_MAINTENANCE_MODE = true;
+
 export default async function proxy(request: NextRequest): Promise<NextResponse> {
-  // If accessing admin routes, verify session but DO NOT redirect to locale
-  if (request.nextUrl.pathname.startsWith('/admin')) {
+  const pathname = request.nextUrl.pathname;
+
+  // Admin routes always allowed
+  if (pathname.startsWith('/admin')) {
     return await updateSession(request);
   }
 
+  // 1. Check Maintenance Mode
+  const hasBypassCookie = request.cookies.has('admin_bypass');
+  const isApi = pathname.startsWith('/api/');
+  const isMaintenancePath = pathname.match(/^\/([a-z]{2}\/)?maintenance$/);
+
+  // If maintenance is enabled, user has no bypass, it's not an API call, and not already on the maintenance page
+  if (IS_MAINTENANCE_MODE && !hasBypassCookie && !isApi && !isMaintenancePath) {
+    const localeMatch = pathname.match(/^\/([a-z]{2})(?:\/|$)/);
+    const locale = (localeMatch && locales.includes(localeMatch[1])) ? localeMatch[1] : defaultLocale;
+    return NextResponse.redirect(new URL(`/${locale}/maintenance`, request.url));
+  }
+
+  // 2. Normal Request Processing
   const response = await updateSession(request);
 
   const intlResponse = intlMiddleware(request);
