@@ -1,4 +1,4 @@
-export const revalidate = 600;
+export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';

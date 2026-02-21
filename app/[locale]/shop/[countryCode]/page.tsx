@@ -1,4 +1,4 @@
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -104,7 +104,7 @@ export default async function CountryPackagesPage({ params }: Props) {
             <ArrowLeft className="w-4 h-4" />
             Back to all destinations
           </Link>
-          
+
           <div className="flex items-center gap-5">
             {flagSrc ? (
               <div className="w-20 h-14 overflow-hidden rounded-lg shadow-lg shrink-0">
@@ -175,7 +175,7 @@ export default async function CountryPackagesPage({ params }: Props) {
                 <p className="text-sm text-gray-500">Pay per day, perfect for short trips</p>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {dailyPlans.map((pkg) => (
                 <PackageCard
@@ -207,7 +207,7 @@ export default async function CountryPackagesPage({ params }: Props) {
                 <p className="text-sm text-gray-500">Set duration, great value for longer stays</p>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {fixedPlans.map((pkg) => (
                 <PackageCard
