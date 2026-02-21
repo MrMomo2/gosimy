@@ -3,7 +3,8 @@ import { createSupabaseAdminClient } from '@/lib/supabase/server';
 import { getAdminUser } from '@/lib/auth/admin';
 import { logAdminAction } from '@/lib/admin/audit';
 // @ts-ignore
-import { authenticator } from 'otplib';
+// @ts-ignore
+const { authenticator } = require('otplib');
 import crypto from 'crypto';
 
 export const runtime = 'nodejs';

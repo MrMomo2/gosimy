@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';
 import { getAdminUser } from '@/lib/auth/admin';
 // @ts-ignore
-import { authenticator } from 'otplib';
+// @ts-ignore
+const { authenticator } = require('otplib');
 import QRCode from 'qrcode';
 
 export const runtime = 'nodejs';
