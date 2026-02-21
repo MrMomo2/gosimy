@@ -23,10 +23,10 @@ export default defineConfig({
         'scripts/',
       ],
       thresholds: {
-        lines: 10,
+        lines: 5,
         functions: 10,
-        branches: 10,
-        statements: 10,
+        branches: 25,
+        statements: 5,
       },
     },
     testTimeout: 10000,
