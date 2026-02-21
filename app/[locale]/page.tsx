@@ -80,7 +80,7 @@ const getHomepageData = async () => {
 
   const all = Array.from(countryMap.values());
   // Pick popular destinations with most plans, filtering out regions (codes > 2 chars) and explicit exclusions
-  let sorted = all
+  const sorted = all
     .filter(d => d.countryCode && d.countryCode.length === 2 && !['EU', 'NA', 'AS', 'SA', 'AF', 'OC', 'WW', 'IL'].includes(d.countryCode))
     .sort((a, b) => b.planCount - a.planCount);
 

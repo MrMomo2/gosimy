@@ -96,7 +96,7 @@ export default function EsimDeliveryEmail({
             1. Go to <strong>Settings → Cellular → Add eSIM</strong> (or equivalent on your device)<br />
             2. Select <strong>Use QR Code</strong> and scan the code above<br />
             3. Or enter the activation code manually<br />
-            4. Follow your carrier's instructions to complete setup
+            4. Follow your carrier&apos;s instructions to complete setup
           </Text>
 
           <Section style={{ textAlign: 'center' as const, margin: '32px 0' }}>

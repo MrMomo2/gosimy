@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';
 import { getAdminUser } from '@/lib/auth/admin';
 import { logAdminAction } from '@/lib/admin/audit';
-// @ts-ignore
-// @ts-ignore
-const { authenticator } = require('otplib');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { authenticator } = require('otplib') as { authenticator: { check: (token: string, secret: string) => boolean } };
 import crypto from 'crypto';
 
 export const runtime = 'nodejs';

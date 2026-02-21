@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';
 import { getAdminUser } from '@/lib/auth/admin';
-// @ts-ignore
-// @ts-ignore
-const { authenticator } = require('otplib');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { authenticator } = require('otplib') as { authenticator: { generateSecret: () => string; keyuri: (account: string, service: string, secret: string) => string } };
 import QRCode from 'qrcode';
 
 export const runtime = 'nodejs';

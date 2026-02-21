@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
     const supabase = createSupabaseAdminClient();
     let csv = '';
-    let filename = `${resource}-${new Date().toISOString().slice(0, 10)}.csv`;
+    const filename = `${resource}-${new Date().toISOString().slice(0, 10)}.csv`;
 
     const startFilter = startDate ? new Date(startDate).toISOString() : undefined;
     const endFilter = endDate ? new Date(endDate + 'T23:59:59').toISOString() : undefined;
