@@ -27,6 +27,14 @@ export const metadata: Metadata = {
     siteName: 'Gosimy',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: '/api/og',
+        width: 1200,
+        height: 630,
+        alt: 'Gosimy — Instant eSIMs for Travelers',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -63,6 +71,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} className={inter.className} data-scroll-behavior="smooth">
       <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {alternates.map(({ hrefLang, href }) => (
           <link key={hrefLang} rel="alternate" hrefLang={hrefLang} href={href} />
         ))}

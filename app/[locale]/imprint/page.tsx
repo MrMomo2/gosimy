@@ -17,7 +17,6 @@ export default function ImprintPage() {
 
                     <section>
                         <h2 className="text-xl font-semibold text-gray-900 mb-3">Site Operator</h2>
-                        {/* TODO: Trage hier deinen echten Vor- und Nachnamen sowie deine Wohnadresse ein */}
                         <p>
                             Monir Said<br />
                             Stationsweg 116<br />
@@ -35,7 +34,6 @@ export default function ImprintPage() {
 
                     <section>
                         <h2 className="text-xl font-semibold text-gray-900 mb-3">Responsible Person</h2>
-                        {/* TODO: Trage auch hier deinen Vor- und Nachnamen ein */}
                         <p>
                             Monir Said<br />
                             (Content responsible according to § 18 Abs. 2 MStV)
