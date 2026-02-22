@@ -19,7 +19,7 @@ const steps = [
     {
         icon: Smartphone,
         title: 'Checkout Securely',
-        description: 'Pay with any major credit card, Apple Pay, or Google Pay through our Stripe-powered checkout. All payments are encrypted and PCI-DSS compliant.',
+        description: 'Pay with any major credit card through our secure checkout. All payments are encrypted and PCI-DSS compliant.',
         color: 'from-violet-400 to-purple-500',
         shadow: 'shadow-violet-500/30',
     },

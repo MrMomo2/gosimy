@@ -44,7 +44,7 @@
       },
       "step2": {
         "title": "Payer en sécurité",
-        "desc": "Paiement avec Stripe — carte, Apple Pay ou Google Pay"
+        "desc": "Paiement sécurisé — carte, Apple Pay ou Google Pay"
       },
       "step3": {
         "title": "Recevoir instantanément",

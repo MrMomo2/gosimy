@@ -41,7 +41,7 @@ const faqs = [
     },
     {
         q: 'Is my payment secure?',
-        a: 'Absolutely. All payments are processed through Stripe, a PCI-DSS Level 1 certified payment processor. We never store your card details.',
+        a: 'Absolutely. All payments are processed through Dodo Payments, a PCI-DSS compliant payment processor. We never store your card details.',
     },
     {
         q: 'How long does delivery take?',

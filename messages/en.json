@@ -44,7 +44,7 @@
       },
       "step2": {
         "title": "Pay Securely",
-        "desc": "Checkout with Stripe — card, Apple Pay, or Google Pay"
+        "desc": "Checkout securely — card, Apple Pay, or Google Pay"
       },
       "step3": {
         "title": "Receive Instantly",

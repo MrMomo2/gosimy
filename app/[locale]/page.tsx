@@ -183,7 +183,7 @@ export default async function HomePage({ params }: Props) {
             {[
               { icon: Globe, value: `${totalDestinations}+`, label: t('home.hero.countriesCovered') },
               { icon: Zap, value: 'Instant', label: 'QR Delivery' },
-              { icon: Shield, value: 'Secure', label: 'Stripe Payments' },
+              { icon: Shield, value: 'Secure', label: 'Secure Payments' },
               { icon: Star, value: '4.9/5', label: 'Customer Rating' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3">

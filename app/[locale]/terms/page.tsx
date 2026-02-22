@@ -38,7 +38,7 @@ export default function TermsPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-3">3. Payments & Refunds</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>All prices are in USD and include applicable taxes calculated at checkout.</li>
-              <li>Payments are processed securely by Stripe. We do not store card details.</li>
+              <li>Payments are processed securely by Dodo Payments. We do not store card details.</li>
               <li><strong>Refund Policy:</strong> Because eSIMs are digital goods delivered immediately, we generally cannot offer refunds once the QR code is delivered. Exceptions apply if:
                 <ul className="list-disc pl-6 mt-2 space-y-1">
                   <li>The eSIM was never delivered (technical failure)</li>

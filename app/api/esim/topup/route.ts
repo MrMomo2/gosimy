@@ -1,6 +1,6 @@
 // POST /api/esim/topup
 // Adds a data package to an existing eSIM.
-// Should be called after a successful Stripe payment for a topup package.
+// Should be called after a successful Dodo Payments payment for a topup package.
 //
 // Body: { iccid: string, packageCode: string }
 // Auth: Supabase session (user must own the eSIM)
