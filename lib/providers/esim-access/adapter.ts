@@ -167,16 +167,24 @@ export function adaptPackage(pkg: EsimAccessPackage): CanonicalPackage {
 }
 
 export function adaptEsimProfile(profile: EsimAccessEsimProfile): CanonicalEsimStatus {
+  const activationCode = profile.ac;
+  const iosInstallUrl = activationCode
+    ? `https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=${encodeURIComponent(activationCode)}`
+    : undefined;
+
   return {
     esimTranNo: profile.esimTranNo,
     iccid: profile.iccid,
     smdpStatus: profile.smdpStatus ?? '',
     esimStatus: profile.esimStatus,
+    state: profile.state,
     dataUsedBytes: BigInt(Math.round(profile.orderUsage ?? 0)),
     dataTotalBytes: BigInt(Math.round(profile.totalVolume ?? 0)),
     expiresAt: profile.expiredTime ? new Date(profile.expiredTime) : undefined,
-    activationCode: profile.ac,
+    activationCode,
     qrCodeUrl: profile.qrCodeUrl,
+    androidInstallUrl: profile.androidInstallUrl,
+    iosInstallUrl,
   };
 }
 

@@ -26,6 +26,8 @@ interface CountrySummary {
   isMultiCountry: boolean;
 }
 
+const POPULAR_COUNTRIES = ['US', 'DE', 'GB', 'FR', 'ES', 'IT', 'TR', 'JP', 'TH', 'AU'];
+
 async function getCountries(): Promise<CountrySummary[]> {
   const supabase = createSupabaseAdminClient();
   const { data, error } = await supabase
@@ -38,7 +40,6 @@ async function getCountries(): Promise<CountrySummary[]> {
 
   const countryMap = new Map<string, CountrySummary>();
   for (const row of data) {
-    // Detect multi-country packages by non-standard country codes (not 2-letter ISO)
     const isMulti = !/^[A-Z]{2}$/.test(row.country_code);
 
     const existing = countryMap.get(row.country_code);
@@ -71,6 +72,12 @@ async function getCountries(): Promise<CountrySummary[]> {
 export default async function ShopPage({ params }: Props) {
   const { locale } = await params;
   const countries = await getCountries();
+  
+  // Get popular destinations
+  const popularDestinations = POPULAR_COUNTRIES
+    .map(code => countries.find(c => c.countryCode === code))
+    .filter((c): c is CountrySummary => c !== undefined)
+    .slice(0, 6);
 
-  return <ShopPageClient countries={countries} locale={locale} />;
+  return <ShopPageClient countries={countries} popularDestinations={popularDestinations} locale={locale} />;
 }

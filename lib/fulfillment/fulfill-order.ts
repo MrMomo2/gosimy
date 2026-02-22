@@ -88,6 +88,7 @@ export async function fulfillOrder(orderId: string): Promise<FulfillmentResult> 
       unit_price_cents: number;
       volume_bytes: string;
       duration_days: number;
+      period_num?: number;
       fulfillment_status?: string;
       retry_count?: number;
     }>;
@@ -139,6 +140,7 @@ export async function fulfillOrder(orderId: string): Promise<FulfillmentResult> 
           item.package_code,
           item.quantity,
           costUsd,
+          item.period_num,
         );
 
         const { data: esim, error: esimError } = await supabase
@@ -188,6 +190,8 @@ export async function fulfillOrder(orderId: string): Promise<FulfillmentResult> 
           iccid: esimStatus.iccid,
           qrCodeUrl: esimStatus.qrCodeUrl,
           activationCode: esimStatus.activationCode,
+          iosInstallUrl: esimStatus.iosInstallUrl,
+          androidInstallUrl: esimStatus.androidInstallUrl,
           packageName: item.package_name,
           countryCode: item.country_code,
           durationDays: item.duration_days,

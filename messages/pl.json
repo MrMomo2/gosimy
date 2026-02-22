@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "shop": "Sklep",
+    "portal": "Moje eSIMy",
+    "login": "Zaloguj",
+    "logout": "Wyloguj",
+    "cart": "Koszyk",
+    "profile": "Ustawienia konta",
+    "signIn": "Zaloguj",
+    "signOut": "Wyloguj"
+  },
+  "home": {
+    "hero": {
+      "title": "Bądź połączony na całym świecie",
+      "subtitle": "Natychmiastowe eSIMy dla {count}+ krajów. Bez umów, bez opłat za roaming.",
+      "cta": "Przeglądaj plany",
+      "ctaSecondary": "Jak to działa",
+      "countriesCovered": "krajów objętych"
+    },
+    "featured": {
+      "title": "Popularne kierunki",
+      "subtitle": "Ulubieńcy naszych podróżników",
+      "viewAll": "Zobacz wszystkie {count}+ kierunki",
+      "fromPrice": "Od $1.99"
+    },
+    "benefits": {
+      "title": "Dlaczego podróżnicy wybierają Gosimy",
+      "subtitle": "Najsprytniejszy sposób na pozostanie połączonym podczas podróży",
+      "stayConnected": "Bądź połączony",
+      "stayConnectedDesc": "Dane wysokiej prędkości w {count}+ krajach. Koniec z szukaniem WiFi lub kupowaniem lokalnych kart SIM.",
+      "noHiddenFees": "Br ukrytych opłat",
+      "noHiddenFeesDesc": "Przejrzyste ceny. Bez umów, bez zaskakujących opłat, bez koszmaru roamingu.",
+      "instantActivation": "Natychmiastowa aktywacja",
+      "instantActivationDesc": "Otrzymaj kod QR eSIM pocztą e-mail w ciągu kilku minut. Aktywuj natychmiast.",
+      "worksEverywhere": "Działa wszędzie",
+      "worksEverywhereDesc": "Kompatybilne ze wszystkimi urządzeniami obsługującymi eSIM. iPhone, Android, tablety i nie tylko."
+    },
+    "howItWorks": {
+      "title": "Jak to działa",
+      "subtitle": "Połącz się w 3 prostych krokach",
+      "step1": {
+        "title": "Wybierz plan",
+        "desc": "Wybierz kierunek i pakiet danych"
+      },
+      "step2": {
+        "title": "Zapłać bezpiecznie",
+        "desc": "Bezpieczna płatność — karta, Apple Pay lub Google Pay"
+      },
+      "step3": {
+        "title": "Otrzymaj natychmiast",
+        "desc": "Otrzymaj kod QR eSIM pocztą e-mail w ciągu kilku minut"
+      },
+      "step4": {
+        "title": "Bądź połączony",
+        "desc": "Zeskanuj i aktywuj — działa na każdym urządzeniu obsługującym eSIM"
+      }
+    },
+    "cta": {
+      "title": "Gotowy na połączoną podróż?",
+      "subtitle": "Dołącz do tysięcy podróżników, którzy już nie martwią się o opłaty roamingowe.",
+      "button": "Przeglądaj plany eSIM"
+    },
+    "payments": {
+      "securePayments": "Bezpieczne płatności:"
+    },
+    "readyCta": "Gotowy na połączony lot?"
+  },
+  "shop": {
+    "title": "Przeglądaj plany eSIM",
+    "searchPlaceholder": "Szukaj według kraju...",
+    "destinationsAvailable": "kierunków dostępnych",
+    "noResults": "Nie znaleziono kierunków",
+    "backToDestinations": "Wróć do kierunków",
+    "plansAvailable": "planów dostępnych",
+    "filters": {
+      "all": "Wszystkie",
+      "europe": "Europa",
+      "asia": "Azja",
+      "americas": "Ameryki",
+      "africa": "Afryka",
+      "oceania": "Oceania",
+      "middleEast": "Bliski Wschód"
+    },
+    "perDay": "/dzień",
+    "total": "razem",
+    "days": "dni",
+    "gb": "GB",
+    "mb": "MB",
+    "selectDays": "Wybierz dni",
+    "day": "dzień"
+  },
+  "package": {
+    "addToCart": "Dodaj do koszyka",
+    "added": "Dodano",
+    "dailyPlan": "Plan dzienny",
+    "unlimited": "Nielimitowane",
+    "volume": "Dane",
+    "duration": "Czas trwania",
+    "validity": "Ważność",
+    "coverage": "Zasięg",
+    "networks": "Sieci"
+  },
+  "cart": {
+    "title": "Twój koszyk",
+    "empty": "Twój koszyk jest pusty",
+    "emptyDesc": "Dodaj plany eSIM, aby zacząć",
+    "continueShopping": "Kontynuuj zakupy",
+    "couponPlaceholder": "Kod rabatowy",
+    "apply": "Zastosuj",
+    "remove": "Usuń",
+    "subtotal": "Suma częściowa",
+    "discount": "Rabat",
+    "total": "Suma",
+    "taxesNote": "Podatki zostaną oblicone przy kasie na podstawie Twojej lokalizacji",
+    "checkout": "Przejdź do kasy",
+    "redirecting": "Przekierowywanie...",
+    "items": "produktów"
+  },
+  "checkout": {
+    "success": {
+      "title": "Płatność zakończona sukcesem!",
+      "subtitle": "Twój eSIM jest przygotowywany",
+      "desc": "Otrzymasz kod QR eSIM pocztą e-mail w ciągu kilku minut. Możesz również śledzić zamówienie w portalu.",
+      "viewOrder": "Zobacz moje eSIMy",
+      "continueShopping": "Kontynuuj zakupy"
+    },
+    "cancel": {
+      "title": "Płatność anulowana",
+      "subtitle": "Twoje zamówienie nie zostało ukończone",
+      "desc": "Nie pobrano żadnych opłat. Możesz spróbować ponownie w dowolnym momencie — produkty w koszyku zostały zachowane.",
+      "cartSaved": "Produkty w koszyku zostały zachowane",
+      "tryAgain": "Spróbuj ponownie",
+      "backHome": "Wróć do strony głównej",
+      "continueShopping": "Kontynuuj zakupy"
+    }
+  },
+  "portal": {
+    "title": "Moje eSIMy",
+    "subtitle": "Zarządzaj swoimi aktywnymi planami eSIM",
+    "noEsims": "Jeszcze brak eSIMów",
+    "noEsimsDesc": "Kup plan eSIM, aby zacząć",
+    "shopCta": "Sklep eSIM",
+    "orderDetails": "Szczegóły zamówienia",
+    "status": {
+      "pending": "Oczekujące",
+      "provisioning": "Przygotowywanie",
+      "active": "Aktywny",
+      "exhausted": "Dane wykorzystane",
+      "expired": "Wygasły",
+      "cancelled": "Anulowany",
+      "failed": "Niepowodzenie"
+    },
+    "iccid": "ICCID",
+    "activationCode": "Kod aktywacyjny",
+    "dataUsed": "Wykorzystane dane",
+    "expires": "Wygasa",
+    "scanQr": "Zeskanuj kod QR",
+    "copyCode": "Kopiuj kod",
+    "copied": "Skopiowano!",
+    "showQr": "Pokaż kod QR",
+    "hideQr": "Ukryj kod QR"
+  },
+  "profile": {
+    "title": "Profil",
+    "subtitle": "Zarządzaj ustawieniami konta",
+    "email": "E-mail",
+    "displayName": "Nazwa wyświetlana",
+    "namePlaceholder": "Wpisz swoje imię",
+    "emailManaged": "E-mail jest zarządzany przez dostawcę logowania",
+    "save": "Zapisz zmiany",
+    "saved": "Profil zaktualizowany pomyślnie!",
+    "changePassword": "Zmień hasło",
+    "currentPassword": "Bieżące hasło",
+    "newPassword": "Nowe hasło",
+    "confirmPassword": "Potwierdź nowe hasło",
+    "passwordMismatch": "Hasła nie są zgodne",
+    "passwordTooShort": "Hasło musi mieć co najmniej 6 znaków",
+    "passwordChanged": "Hasło zaktualizowane pomyślnie!",
+    "passwordOAuthNotice": "Twoje hasło jest zarządzane przez konto {provider}. Aby je zmienić, zaktualizuj ustawienia konta tam.",
+    "yourData": "Twoje dane",
+    "downloadData": "Pobierz moje dane",
+    "downloadDataDesc": "Pobierz kopię wszystkich swoich danych osobowych, w tym zamówień i eSIMów, jako plik JSON.",
+    "dangerZone": "Strefa zagrożenia",
+    "deleteAccount": "Usuń konto",
+    "deleteAccountDesc": "Trwale usuń swoje konto i zanonimizuj historię zamówień. Nie można tego cofnąć.",
+    "deleteAccountWarning": "To trwale usunie Twoje konto. Historia zamówień zostanie zanonimizowana, ale zachowana z przyczyn prawnych.",
+    "deleteAccountConfirmLabel": "Wpisz swój e-mail, aby potwierdzić:",
+    "deleteAccountConfirmButton": "Trwale usuń konto",
+    "deleteActiveOrdersError": "Masz zamówienia aktualnie przetwarzane. Poczekaj na realizację."
+  },
+  "auth": {
+    "login": {
+      "title": "Witaj ponownie",
+      "subtitle": "Zaloguj się, aby zarządzać swoimi eSIMami",
+      "signUpTitle": "Utwórz konto",
+      "signUpSubtitle": "Zarejestruj się, aby zarządzać eSIMami i śledzić zamówienia",
+      "email": "E-mail",
+      "password": "Hasło",
+      "signIn": "Zaloguj",
+      "signUp": "Zarejestruj",
+      "forgotPassword": "Zapomniałeś hasła?",
+      "orContinueWith": "Lub kontynuuj z e-mailem",
+      "google": "Kontynuuj z Google",
+      "noAccount": "Nie masz konta?",
+      "hasAccount": "Masz już konto?",
+      "signUpLink": "Zarejestruj się",
+      "signInLink": "Zaloguj się"
+    }
+  },
+  "search": {
+    "placeholder": "Dokąd podróżujesz?",
+    "popular": "Popularne kierunki",
+    "destinations": "Kierunki",
+    "noResults": "Nie znaleziono kierunków",
+    "searchAll": "Naciśnij Enter, aby wyszukać wszystkie plany"
+  },
+  "cookie": {
+    "title": "Używamy plików cookie",
+    "message": "Używamy ściśle niezbędnych plików cookie do uwierzytelniania i przechowywania koszyka. Za Twoją zgodą zbieramy również anonimowe analizy, aby ulepszać naszą usługę. Zobacz naszą",
+    "privacyLink": "Politykę prywatności",
+    "accept": "Akceptuj wszystkie",
+    "decline": "Odrzuć"
+  },
+  "footer": {
+    "tagline": "Natychmiastowe eSIMy dla podróżników na całym świecie",
+    "poweredBy": "Ceny w USD · Powered by eSIM Access",
+    "browsePlans": "Przeglądaj plany",
+    "europeEsims": "eSIMy Europa",
+    "asiaEsims": "eSIMy Azja",
+    "americasEsims": "eSIMy Ameryki",
+    "links": {
+      "shop": "Sklep",
+      "portal": "Portal",
+      "privacy": "Polityka prywatności",
+      "terms": "Regulamin",
+      "contact": "Kontakt"
+    },
+    "copyright": "© {year} Gosimy. Wszelkie prawa zastrzeżone."
+  },
+  "common": {
+    "loading": "Ładowanie...",
+    "error": "Coś poszło nie tak",
+    "retry": "Spróbuj ponownie",
+    "close": "Zamknij",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź",
+    "back": "Wstecz",
+    "next": "Dalej",
+    "save": "Zapisz",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "view": "Zobacz"
+  },
+  "exitPopup": {
+    "title": "Zaczekaj! Nie wychodź jeszcze!",
+    "subtitle": "Otrzymaj 10% zniżki na pierwsze zamówienie",
+    "description": "Użyj kodu WELCOME10 przy kasie",
+    "button": "Otrzymaj 10% zniżki",
+    "noThanks": "Nie dziękuję, nie chcę zniżki"
+  }
+}

@@ -17,6 +17,10 @@ import type {
   EsimAccessUsageResponse,
   EsimAccessTopupRequest,
   EsimAccessCancelRequest,
+  EsimAccessSuspendRequest,
+  EsimAccessResumeRequest,
+  EsimAccessCompatibleRequest,
+  EsimAccessCompatibleResponse,
 } from './types';
 import { adaptPackage, adaptEsimProfile, adaptLocation } from './adapter';
 
@@ -100,19 +104,27 @@ export class EsimAccessProvider implements IEsimProvider {
   // ─── Place order ───────────────────────────────────────────────────────────
   // Returns immediately with providerOrderNo — eSIM is NOT yet provisioned.
   // Caller must poll queryEsim(providerOrderNo) until smdpStatus === 'RELEASED'.
+  // For daily plans (dataType=2), periodNum specifies the number of days (1-365).
   async placeOrder(
     packageCode: string,
     quantity: number,
     priceUsd: number,
+    periodNum?: number,
   ): Promise<CanonicalOrderResult> {
     const transactionId = `gosimy_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-    const priceInUnits = Math.round(priceUsd * PRICE_DIVISOR);
+
+    const packageInfo: { packageCode: string; count: number; periodNum?: number } = {
+      packageCode,
+      count: quantity,
+    };
+
+    if (periodNum && periodNum > 1) {
+      packageInfo.periodNum = periodNum;
+    }
 
     const response = await this.request<EsimAccessOrderResponse>('/esim/order', {
       transactionId,
-      packageInfoList: [
-        { packageCode, count: quantity },
-      ],
+      packageInfoList: [packageInfo],
     });
 
     if (!response.success || !response.obj) {
@@ -242,5 +254,76 @@ export class EsimAccessProvider implements IEsimProvider {
     if (!response.success) {
       throw new Error(`cancelEsim failed: ${response.errorMsg ?? 'unknown error'}`);
     }
+  }
+
+  // ─── Suspend ────────────────────────────────────────────────────────────────
+  async suspendEsim(params: { esimTranNo?: string; iccid?: string }): Promise<void> {
+    if (!params.esimTranNo && !params.iccid) {
+      throw new Error('suspendEsim requires esimTranNo or iccid');
+    }
+
+    const body: EsimAccessSuspendRequest = {
+      esimTranNo: params.esimTranNo ?? '',
+      iccid: params.iccid,
+    };
+
+    const response = await this.request<{
+      success: boolean;
+      errorCode: string | null;
+      errorMsg: string | null;
+    }>('/esim/suspend', body);
+
+    if (!response.success) {
+      throw new Error(`suspendEsim failed: ${response.errorMsg ?? 'unknown error'}`);
+    }
+  }
+
+  // ─── Resume ────────────────────────────────────────────────────────────────
+  async resumeEsim(params: { esimTranNo?: string; iccid?: string }): Promise<void> {
+    if (!params.esimTranNo && !params.iccid) {
+      throw new Error('resumeEsim requires esimTranNo or iccid');
+    }
+
+    const body: EsimAccessResumeRequest = {
+      esimTranNo: params.esimTranNo ?? '',
+      iccid: params.iccid,
+    };
+
+    const response = await this.request<{
+      success: boolean;
+      errorCode: string | null;
+      errorMsg: string | null;
+    }>('/esim/resume', body);
+
+    if (!response.success) {
+      throw new Error(`resumeEsim failed: ${response.errorMsg ?? 'unknown error'}`);
+    }
+  }
+
+  // ─── Compatible Packages ─────────────────────────────────────────────────
+  async getCompatiblePackages(iccid: string): Promise<Array<{
+    packageCode: string;
+    name: string;
+    volume: bigint;
+    priceUsd: number;
+    durationDays: number;
+    durationUnit: string;
+  }>> {
+    const body: EsimAccessCompatibleRequest = { iccid };
+
+    const response = await this.request<EsimAccessCompatibleResponse>('/esim/compatible', body);
+
+    if (!response.success || !response.obj) {
+      throw new Error(`getCompatiblePackages failed: ${response.errorMsg ?? 'unknown error'}`);
+    }
+
+    return response.obj.compatibleList.map(pkg => ({
+      packageCode: pkg.packageCode,
+      name: pkg.name,
+      volume: BigInt(pkg.volume),
+      priceUsd: pkg.price / PRICE_DIVISOR,
+      durationDays: pkg.duration,
+      durationUnit: pkg.durationUnit,
+    }));
   }
 }

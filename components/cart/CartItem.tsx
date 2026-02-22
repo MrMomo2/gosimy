@@ -14,6 +14,8 @@ export function CartItem({ item }: { item: CartItemType }) {
   const removeItem = useCartStore((s) => s.removeItem);
   const updateQuantity = useCartStore((s) => s.updateQuantity);
 
+  const isDaily = item.isDaily ?? false;
+  const displayDays = isDaily && item.periodNum ? item.periodNum : item.durationDays;
   const price = ((item.retailPriceCents * item.quantity) / 100).toFixed(2);
   const FLAG_BASE = 0x1F1E6 - 65;
   const flag = item.countryCode.length === 2
@@ -34,14 +36,17 @@ export function CartItem({ item }: { item: CartItemType }) {
           </span>
           <span className="flex items-center gap-1">
             <Clock className="w-3.5 h-3.5 text-sky-500" aria-hidden="true" />
-            {item.durationDays} days
+            {displayDays} days
           </span>
+          {isDaily && item.periodNum && (
+            <span className="text-amber-600 font-medium">Daily</span>
+          )}
         </div>
 
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-1" role="group" aria-label={`Quantity: ${item.quantity}`}>
             <button
-              onClick={() => updateQuantity(item.packageCode, item.quantity - 1)}
+              onClick={() => updateQuantity(item.packageCode, item.quantity - 1, item.periodNum)}
               className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:border-gray-300 transition-colors"
               aria-label={`Decrease quantity of ${item.name}`}
             >
@@ -49,7 +54,7 @@ export function CartItem({ item }: { item: CartItemType }) {
             </button>
             <span className="w-8 text-center text-sm font-semibold text-gray-900" aria-live="polite">{item.quantity}</span>
             <button
-              onClick={() => updateQuantity(item.packageCode, item.quantity + 1)}
+              onClick={() => updateQuantity(item.packageCode, item.quantity + 1, item.periodNum)}
               className="w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:border-gray-300 transition-colors"
               aria-label={`Increase quantity of ${item.name}`}
             >
@@ -60,7 +65,7 @@ export function CartItem({ item }: { item: CartItemType }) {
           <div className="flex items-center gap-3">
             <span className="font-bold text-base gradient-text">${price}</span>
             <button
-              onClick={() => removeItem(item.packageCode)}
+              onClick={() => removeItem(item.packageCode, item.periodNum)}
               className="p-2 rounded-lg hover:bg-red-50 hover:text-red-500 transition-colors text-gray-400"
               aria-label={`Remove ${item.name} from cart`}
             >

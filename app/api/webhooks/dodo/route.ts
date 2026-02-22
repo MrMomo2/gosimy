@@ -105,11 +105,22 @@ export async function POST(req: Request) {
 
             const supabase = createSupabaseAdminClient();
 
+            let invoiceUrl: string | null = null;
+            if (paymentId) {
+                try {
+                    const { getPaymentInvoiceUrl } = await import('@/lib/payments/invoice');
+                    invoiceUrl = await getPaymentInvoiceUrl(paymentId);
+                } catch (err) {
+                    console.error('[dodo-webhook] Failed to get invoice URL:', err);
+                }
+            }
+
             const { data: updatedRows } = await supabase
                 .from('orders')
                 .update({
                     status: 'paid',
                     payment_intent_id: paymentId || null,
+                    payment_invoice_id: invoiceUrl,
                     guest_email: customerEmail || null,
                     locale,
                     updated_at: new Date().toISOString(),

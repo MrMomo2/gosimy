@@ -17,9 +17,13 @@ const LOCALE_NAMES: Record<string, string> = {
   de: 'Deutsch',
   fr: 'Français',
   es: 'Español',
+  it: 'Italiano',
+  pt: 'Português',
+  nl: 'Nederlands',
+  pl: 'Polski',
 };
 
-const LOCALES = ['en', 'de', 'fr', 'es'];
+const LOCALES = ['en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'pl'];
 
 export function Navbar({ locale }: { locale: string }) {
   const t = useTranslations();

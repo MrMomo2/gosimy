@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';
+import { sendAdminAlert } from '@/lib/admin/alerts';
 import type { EsimAccessWebhookEvent } from '@/lib/providers/esim-access/types';
 
 export const runtime = 'nodejs';
@@ -120,6 +121,31 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           .from('esims')
           .update(usageUpdate)
           .eq('iccid', iccid);
+
+        break;
+      }
+
+      case 'VALIDITY_USAGE': {
+        const { iccid, expiredTime, remainingHours } = event.obj;
+        console.log(`[esim-access webhook] VALIDITY_USAGE iccid=${iccid} expires=${expiredTime} remainingHours=${remainingHours}`);
+
+        // Mark eSIM as expiring soon (user should be notified via email/SMS)
+        await supabase
+          .from('esims')
+          .update({
+            expires_at: new Date(expiredTime).toISOString(),
+            updated_at: new Date().toISOString(),
+          })
+          .eq('iccid', iccid);
+
+        // Optionally send admin alert for monitoring
+        if (remainingHours <= 24) {
+          await sendAdminAlert({
+            title: 'eSIM Expiring Soon',
+            message: `eSIM ${iccid} expires in ${remainingHours} hours (${new Date(expiredTime).toLocaleString()})`,
+            level: 'warning',
+          });
+        }
 
         break;
       }

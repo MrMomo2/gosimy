@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Vercel Cron Jobs provide an Authorization header with this token
 const CRON_SECRET = process.env.CRON_SECRET;
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lskwritlptfmxeysxihb.supabase.co';
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -12,13 +11,10 @@ const PRICE_DIVISOR = 10_000;
 function calcRetailPriceCents(costUsd: number) {
     let retail;
     if (costUsd <= 10) {
-        // 2x markup for small packages
         retail = costUsd * 2.0;
     } else if (costUsd <= 20) {
-        // $20 base + 1.5x on amount over $10
         retail = 20.0 + (costUsd - 10) * 1.5;
     } else {
-        // $35 base + 1.25x on amount over $20
         retail = 35.0 + (costUsd - 20) * 1.25;
     }
     return Math.ceil(retail * 100);
@@ -85,11 +81,23 @@ function detectRegion(code: string) {
     return 'global';
 }
 
-export const maxDuration = 300; // max Vercel timeout set to 5 mins
+function getIncludedCountries(locationStr: string | null | undefined): string[] {
+    if (!locationStr || typeof locationStr !== 'string') {
+        return [];
+    }
+    
+    const countries: string[] = locationStr
+        .split(',')
+        .map((c: string) => c.trim().toUpperCase())
+        .filter((c: string) => c.length > 0);
+    
+    return [...new Set(countries)];
+}
+
+export const maxDuration = 300;
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
-    // 1. Verify Vercel Cron Job authorization
     console.log('[Cron] Starting update-packages job');
     if (CRON_SECRET) {
         const authHeader = request.headers.get('authorization');
@@ -97,15 +105,11 @@ export async function GET(request: Request) {
             console.warn('[Cron] Unauthorized attempt to update packages');
             return new NextResponse('Unauthorized', { status: 401 });
         }
-    } else {
-        // For local env or missing secrets
-        console.warn('[Cron] CRON_SECRET is not set, executing anyway (not recommended in prod).');
     }
 
     try {
         const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
-        // 2. Fetch eSIM Access data
         console.log('[Cron] Fetching packages from eSIM Access...');
         const res = await fetch('https://api.esimaccess.com/api/v1/open/package/list', {
             method: 'POST',
@@ -125,7 +129,6 @@ export async function GET(request: Request) {
         const list = data.obj.packageList;
         console.log(`[Cron] Fetched ${list.length} packages`);
 
-        // 3. Process into Database rows
         const rows = list.map((pkg: any) => {
             const costUsd = pkg.price / PRICE_DIVISOR;
             const raw = pkg.location ?? '';
@@ -137,10 +140,13 @@ export async function GET(request: Request) {
                 ? getMultiCountryName(locationCode, pkg.name)
                 : (COUNTRY_NAMES[locationCode] ?? pkg.name);
 
+            const includedCountries = getIncludedCountries(pkg.location);
+
             return {
                 package_code: pkg.packageCode,
                 provider: 'esim_access',
                 name: pkg.name,
+                location: pkg.location || null,
                 country_code: locationCode,
                 country_name: countryName,
                 region: detectRegion(locationCode),
@@ -150,12 +156,12 @@ export async function GET(request: Request) {
                 duration_days: pkg.duration ?? 0,
                 data_type: pkg.dataType ?? 1,
                 network_list: pkg.locationNetworkList ?? null,
+                included_countries: includedCountries,
                 is_active: true,
                 cached_at: new Date().toISOString(),
             };
         });
 
-        // 4. Batch UPSERT
         const BATCH = 300;
         let done = 0;
         for (let i = 0; i < rows.length; i += BATCH) {

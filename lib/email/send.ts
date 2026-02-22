@@ -17,6 +17,8 @@ export interface EsimDeliveryItem {
   iccid?: string;
   qrCodeUrl?: string;
   activationCode?: string;
+  iosInstallUrl?: string;
+  androidInstallUrl?: string;
   packageName: string;
   countryCode: string;
   durationDays: number;

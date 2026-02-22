@@ -83,7 +83,11 @@ function CountryCard({ country, locale }: { country: CountrySummary; locale: str
     );
 }
 
-function ShopContent({ countries, locale }: { countries: CountrySummary[]; locale: string }) {
+function ShopContent({ countries, popularDestinations, locale }: { 
+    countries: CountrySummary[]; 
+    popularDestinations: CountrySummary[];
+    locale: string 
+}) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -153,6 +157,41 @@ function ShopContent({ countries, locale }: { countries: CountrySummary[]; local
                     </div>
                 </div>
             </section>
+
+            {/* Popular Destinations */}
+            {popularDestinations.length > 0 && (
+                <section className="bg-white border-b">
+                    <div className="container py-6">
+                        <h3 className="text-sm font-semibold text-gray-500 mb-4">Popular Destinations</h3>
+                        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                            {popularDestinations.map((dest) => (
+                                <Link
+                                    key={dest.countryCode}
+                                    href={`/${locale}/shop/${dest.countryCode}`}
+                                    className="shrink-0 flex items-center gap-3 px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors"
+                                >
+                                    {getFlagUrl(dest.countryCode) ? (
+                                        <Image
+                                            src={getFlagUrl(dest.countryCode)!}
+                                            alt={dest.countryName}
+                                            width={32}
+                                            height={24}
+                                            className="w-8 h-6 object-cover rounded"
+                                            unoptimized
+                                        />
+                                    ) : (
+                                        <Globe className="w-6 h-6 text-gray-400" />
+                                    )}
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-900">{dest.countryName}</p>
+                                        <p className="text-xs text-gray-500">from ${(dest.minPriceCents / 100).toFixed(0)}</p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Region Filters */}
             <div className="bg-white border-b border-gray-100 sticky top-16 z-30">
@@ -239,14 +278,18 @@ function ShopContent({ countries, locale }: { countries: CountrySummary[]; local
     );
 }
 
-export default function ShopPageClient({ countries, locale }: { countries: CountrySummary[]; locale: string }) {
+export default function ShopPageClient({ countries, popularDestinations, locale }: { 
+    countries: CountrySummary[]; 
+    popularDestinations: CountrySummary[];
+    locale: string 
+}) {
     return (
         <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
             </div>
         }>
-            <ShopContent countries={countries} locale={locale} />
+            <ShopContent countries={countries} popularDestinations={popularDestinations} locale={locale} />
         </Suspense>
     );
 }

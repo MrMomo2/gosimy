@@ -14,14 +14,16 @@ export interface CartItem {
   volumeBytes: string;
   durationDays: number;
   quantity: number;
+  periodNum?: number;
+  isDaily?: boolean;
 }
 
 interface CartState {
   items: CartItem[];
   createdAt: number | null;
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
-  removeItem: (packageCode: string) => void;
-  updateQuantity: (packageCode: string, quantity: number) => void;
+  addItem: (item: Omit<CartItem, 'quantity'> & { periodNum?: number }) => void;
+  removeItem: (packageCode: string, periodNum?: number) => void;
+  updateQuantity: (packageCode: string, quantity: number, periodNum?: number) => void;
   clearCart: () => void;
   getTotalCents: () => number;
   getItemCount: () => number;
@@ -40,12 +42,20 @@ export const useCartStore = create<CartState>()(
       createdAt: null,
 
       addItem: (item) => {
+        const isDaily = item.isDaily ?? false;
+        const periodNum = item.periodNum ?? 1;
+        
+        const pricePerDay = item.retailPriceCents / (item.durationDays || 1);
+        const finalPriceCents = isDaily 
+          ? Math.round(pricePerDay * periodNum)
+          : item.retailPriceCents;
+
         trackEcommerce({
           type: 'add_to_cart',
           item: {
             itemId: item.packageCode,
             itemName: item.name,
-            price: item.retailPriceCents / 100,
+            price: finalPriceCents / 100,
             quantity: 1,
             itemCategory: item.countryName,
           },
@@ -54,32 +64,32 @@ export const useCartStore = create<CartState>()(
         set((state) => {
           if (isCartExpired(state.createdAt)) {
             return {
-              items: [{ ...item, quantity: 1 }],
+              items: [{ ...item, quantity: 1, retailPriceCents: finalPriceCents }],
               createdAt: Date.now(),
             };
           }
 
           const existing = state.items.find(
-            (i) => i.packageCode === item.packageCode
+            (i) => i.packageCode === item.packageCode && i.periodNum === periodNum
           );
           if (existing) {
             return {
               items: state.items.map((i) =>
-                i.packageCode === item.packageCode
+                i.packageCode === item.packageCode && i.periodNum === periodNum
                   ? { ...i, quantity: i.quantity + 1 }
                   : i
               ),
             };
           }
           return {
-            items: [...state.items, { ...item, quantity: 1 }],
+            items: [...state.items, { ...item, quantity: 1, retailPriceCents: finalPriceCents }],
             createdAt: state.createdAt ?? Date.now(),
           };
         });
       },
 
-      removeItem: (packageCode) => {
-        const item = get().items.find((i) => i.packageCode === packageCode);
+      removeItem: (packageCode, periodNum) => {
+        const item = get().items.find((i) => i.packageCode === packageCode && i.periodNum === periodNum);
         if (item) {
           trackEcommerce({
             type: 'remove_from_cart',
@@ -92,18 +102,18 @@ export const useCartStore = create<CartState>()(
           });
         }
         set((state) => ({
-          items: state.items.filter((i) => i.packageCode !== packageCode),
+          items: state.items.filter((i) => !(i.packageCode === packageCode && i.periodNum === periodNum)),
         }));
       },
 
-      updateQuantity: (packageCode, quantity) => {
+      updateQuantity: (packageCode, quantity, periodNum) => {
         if (quantity <= 0) {
-          get().removeItem(packageCode);
+          get().removeItem(packageCode, periodNum);
           return;
         }
         set((state) => ({
           items: state.items.map((i) =>
-            i.packageCode === packageCode ? { ...i, quantity } : i
+            i.packageCode === packageCode && i.periodNum === periodNum ? { ...i, quantity } : i
           ),
         }));
       },

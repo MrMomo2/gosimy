@@ -41,11 +41,14 @@ export interface CanonicalEsimStatus {
   iccid: string;
   smdpStatus: string;
   esimStatus?: string;
+  state?: string;           // Active, Suspended, Deactivated
   dataUsedBytes: bigint;
   dataTotalBytes: bigint;
   expiresAt?: Date;
   activationCode?: string;
   qrCodeUrl?: string;
+  androidInstallUrl?: string;
+  iosInstallUrl?: string;
 }
 
 export interface CanonicalBalance {
@@ -74,8 +77,9 @@ export interface IEsimProvider {
   /**
    * Place a new eSIM order.
    * Returns immediately with an orderNo for polling — eSIM is NOT yet provisioned.
+   * For daily plans (dataType=2), periodNum specifies the number of days (1-365).
    */
-  placeOrder(packageCode: string, quantity: number, priceUsd: number): Promise<CanonicalOrderResult>;
+  placeOrder(packageCode: string, quantity: number, priceUsd: number, periodNum?: number): Promise<CanonicalOrderResult>;
 
   /**
    * Query provisioning status by orderNo OR iccid.
@@ -96,4 +100,20 @@ export interface IEsimProvider {
   }): Promise<CanonicalOrderResult>;
 
   cancelEsim?(params: { esimTranNo?: string; iccid?: string }): Promise<void>;
+
+  /** Suspend an active eSIM */
+  suspendEsim?(params: { esimTranNo?: string; iccid?: string }): Promise<void>;
+
+  /** Resume a suspended eSIM */
+  resumeEsim?(params: { esimTranNo?: string; iccid?: string }): Promise<void>;
+
+  /** Check which packages are compatible with an eSIM */
+  getCompatiblePackages?(iccid: string): Promise<Array<{
+    packageCode: string;
+    name: string;
+    volume: bigint;
+    priceUsd: number;
+    durationDays: number;
+    durationUnit: string;
+  }>>;
 }

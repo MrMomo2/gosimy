@@ -248,5 +248,12 @@
     "delete": "Supprimer",
     "edit": "Modifier",
     "view": "Voir"
+  },
+  "exitPopup": {
+    "title": "Attendez! Ne partez pas encore!",
+    "subtitle": "Obtenez 10% de réduction sur votre première commande",
+    "description": "Utilisez le code WELCOME10 à la caisse",
+    "button": "Obtenir ma réduction de 10%",
+    "noThanks": "Non merci, je ne veux pas de réduction"
   }
 }

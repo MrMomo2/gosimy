@@ -11,6 +11,8 @@ export async function POST(request: NextRequest) {
   return withAdminAuth(request, async () => {
     const formData = await request.formData();
     const refundId = formData.get('refundId') as string;
+  const amountCents = formData.get('amountCents') as string | null;
+  const refundAmount = amountCents ? parseInt(amountCents, 10) : null;
 
     if (!isValidUUID(refundId)) {
       return NextResponse.json({ error: 'Invalid refund ID format' }, { status: 400 });
@@ -42,9 +44,15 @@ export async function POST(request: NextRequest) {
           : 'live_mode',
       });
 
-      const refund = await client.refunds.create({
+      const refundData: { payment_id: string; amount?: number } = {
         payment_id: paymentIntentId,
-      });
+      };
+
+      if (refundAmount && refundAmount > 0 && refundAmount <= refundRequest.amount_cents) {
+        refundData.amount = refundAmount;
+      }
+
+      const refund = await client.refunds.create(refundData);
 
       const { data: esims } = await supabase
         .from('esims')

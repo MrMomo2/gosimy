@@ -248,5 +248,12 @@
     "delete": "Eliminar",
     "edit": "Editar",
     "view": "Ver"
+  },
+  "exitPopup": {
+    "title": "¡Espera! ¡No te vayas todavía!",
+    "subtitle": "Obtén 10% de descuento en tu primer pedido",
+    "description": "Usa el código WELCOME10 en el checkout",
+    "button": "Obtener mi descuento del 10%",
+    "noThanks": "No gracias, no quiero descuento"
   }
 }

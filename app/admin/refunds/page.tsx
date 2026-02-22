@@ -127,9 +127,18 @@ export default async function AdminRefundsPage({ searchParams }: Props) {
                     <td className="px-6 py-4 text-sm text-gray-500">{formatDate(req.created_at)}</td>
                     <td className="px-6 py-4">
                       {req.status === 'pending' && (
-                        <div className="flex gap-2">
-                          <form action="/api/admin/refunds/approve" method="POST">
+                        <div className="flex flex-col gap-2">
+                          <form action="/api/admin/refunds/approve" method="POST" className="flex gap-2">
                             <input type="hidden" name="refundId" value={req.id} />
+                            <input
+                              type="number"
+                              name="amountCents"
+                              placeholder={String(req.amount_cents)}
+                              defaultValue={req.amount_cents}
+                              min={0}
+                              max={req.amount_cents}
+                              className="w-24 px-2 py-1 text-sm border rounded-lg"
+                            />
                             <button
                               type="submit"
                               className="px-3 py-1.5 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700"
@@ -141,7 +150,7 @@ export default async function AdminRefundsPage({ searchParams }: Props) {
                             <input type="hidden" name="refundId" value={req.id} />
                             <button
                               type="submit"
-                              className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700"
+                              className="w-full px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700"
                             >
                               Reject
                             </button>

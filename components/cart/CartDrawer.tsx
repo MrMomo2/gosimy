@@ -175,7 +175,7 @@ export function CartDrawer({ open, onClose, locale }: CartDrawerProps) {
           ) : (
             <div className="space-y-4" role="list" aria-label="Cart items">
               {items.map((item) => (
-                <CartItem key={item.packageCode} item={item} />
+                <CartItem key={`${item.packageCode}-${item.periodNum ?? 'fixed'}`} item={item} />
               ))}
             </div>
           )}

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://gosimy.com';
-const LOCALES = ['en', 'de', 'fr', 'es'];
+const LOCALES = ['en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'pl'];
 
 export const dynamic = 'force-dynamic';
 

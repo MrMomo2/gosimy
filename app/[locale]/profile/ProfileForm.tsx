@@ -3,7 +3,7 @@
 import { createSupabaseBrowserClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { User, Mail, Save, Loader2, Lock, Download, Trash2 } from 'lucide-react';
+import { User, Mail, Save, Loader2, Lock, Download, Trash2, Monitor, LogOut } from 'lucide-react';
 
 interface Props {
   locale: string;
@@ -25,6 +25,8 @@ async function fetchCsrfToken(): Promise<string> {
 export function ProfileForm({ locale, user }: Props) {
   const router = useRouter();
   const supabase = createSupabaseBrowserClient();
+
+  const [signingOut, setSigningOut] = useState(false);
 
   // Display name
   const [fullName, setFullName] = useState(user.fullName);
@@ -120,6 +122,21 @@ export function ProfileForm({ locale, user }: Props) {
       setDeleteMessage({ type: 'error', text: 'Something went wrong. Please try again.' });
     } finally {
       setDeleteLoading(false);
+    }
+  };
+
+  const handleSignOutAll = async () => {
+    if (!confirm('This will sign you out of all devices. You will need to sign in again.')) {
+      return;
+    }
+    setSigningOut(true);
+    try {
+      await fetch('/api/user/sessions', { method: 'POST' });
+      window.location.href = `/${locale}/auth/login`;
+    } catch {
+      alert('Failed to sign out');
+    } finally {
+      setSigningOut(false);
     }
   };
 
@@ -275,6 +292,29 @@ export function ProfileForm({ locale, user }: Props) {
             <Download className="w-4 h-4" />
             Download My Data
           </a>
+        </div>
+      </div>
+
+      {/* Sessions */}
+      <div className="bg-white rounded-xl border shadow-sm">
+        <div className="p-6 border-b">
+          <h3 className="font-semibold flex items-center gap-2">
+            <Monitor className="w-4 h-4" />
+            Sessions
+          </h3>
+        </div>
+        <div className="p-6">
+          <p className="text-sm text-muted-foreground mb-4">
+            Sign out of all devices and sessions. You'll need to sign in again on all devices.
+          </p>
+          <button
+            onClick={handleSignOutAll}
+            disabled={signingOut}
+            className="flex items-center gap-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
+          >
+            {signingOut ? <Loader2 className="w-4 h-4 animate-spin" /> : <LogOut className="w-4 h-4" />}
+            Sign Out All Devices
+          </button>
         </div>
       </div>
 

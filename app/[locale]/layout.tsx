@@ -12,7 +12,7 @@ import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const locales = ['en', 'de', 'fr', 'es'];
+const locales = ['en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'pl'];
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://gosimy.com';
 

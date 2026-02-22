@@ -10,6 +10,8 @@ export const checkoutItemSchema = z.object({
   volumeBytes: z.coerce.string().min(1, 'Volume is required'),
   durationDays: z.coerce.number().int().positive('Duration must be positive'),
   quantity: z.coerce.number().int().positive('Quantity must be positive').max(10, 'Maximum 10 per item').default(1),
+  periodNum: z.coerce.number().int().positive().optional(),
+  isDaily: z.boolean().optional(),
 });
 
 export const checkoutSchema = z.object({

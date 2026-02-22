@@ -2,7 +2,7 @@ import createMiddleware from 'next-intl/middleware';
 import { type NextRequest, NextResponse } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
 
-const locales = ['en', 'de', 'fr', 'es'];
+const locales = ['en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'pl'];
 const defaultLocale = 'en';
 
 const intlMiddleware = createMiddleware({

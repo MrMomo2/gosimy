@@ -160,9 +160,12 @@ export async function POST(request: NextRequest) {
         );
     }
 
+    const isTestMode = process.env.DODO_PAYMENTS_ENVIRONMENT === 'test' || 
+        process.env.NEXT_PUBLIC_APP_URL?.includes('localhost');
+
     const client = new DodoPayments({
         bearerToken: process.env.DODO_PAYMENTS_API_KEY,
-        environment: process.env.NEXT_PUBLIC_APP_URL?.includes('localhost') ? 'test_mode' : 'live_mode',
+        environment: isTestMode ? 'test_mode' : 'live_mode',
     });
 
     try {
@@ -197,6 +200,7 @@ export async function POST(request: NextRequest) {
                 unit_price_cents: item.retailPriceCents,
                 volume_bytes: item.volumeBytes,
                 duration_days: item.durationDays,
+                period_num: item.periodNum ?? null,
             }))
         );
 

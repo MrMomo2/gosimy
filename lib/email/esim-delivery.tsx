@@ -19,6 +19,8 @@ interface EsimDeliveryEmailProps {
     iccid?: string;
     qrCodeUrl?: string;
     activationCode?: string;
+    iosInstallUrl?: string;
+    androidInstallUrl?: string;
     packageName: string;
     countryCode: string;
     durationDays: number;
@@ -81,10 +83,32 @@ export default function EsimDeliveryEmail({
               )}
 
               {esim.activationCode && (
-                <Text style={detail}>
-                  <strong>Activation Code:</strong>{' '}
-                  <code style={code}>{esim.activationCode}</code>
-                </Text>
+                <>
+                  <Text style={detail}>
+                    <strong>Activation Code:</strong>{' '}
+                    <code style={code}>{esim.activationCode}</code>
+                  </Text>
+                  {esim.iosInstallUrl && (
+                    <Section style={{ textAlign: 'center' as const, margin: '16px 0' }}>
+                      <Button
+                        href={esim.iosInstallUrl}
+                        style={iosButton}
+                      >
+                        Install on iPhone (iOS 17.4+)
+                      </Button>
+                    </Section>
+                  )}
+                  {esim.androidInstallUrl && (
+                    <Section style={{ textAlign: 'center' as const, margin: '16px 0' }}>
+                      <Button
+                        href={esim.androidInstallUrl}
+                        style={androidButton}
+                      >
+                        Install on Android
+                      </Button>
+                    </Section>
+                  )}
+                </>
               )}
             </Section>
           ))}
@@ -194,6 +218,28 @@ const button = {
   fontWeight: 'bold',
   padding: '12px 32px',
   textDecoration: 'none',
+};
+
+const iosButton = {
+  backgroundColor: '#000000',
+  borderRadius: '6px',
+  color: '#fff',
+  fontSize: '14px',
+  fontWeight: 'bold',
+  padding: '10px 24px',
+  textDecoration: 'none',
+  display: 'inline-block',
+};
+
+const androidButton = {
+  backgroundColor: '#34A853',
+  borderRadius: '6px',
+  color: '#fff',
+  fontSize: '14px',
+  fontWeight: 'bold',
+  padding: '10px 24px',
+  textDecoration: 'none',
+  display: 'inline-block',
 };
 
 const footer = {

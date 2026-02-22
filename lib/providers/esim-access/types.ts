@@ -78,8 +78,8 @@ export interface EsimAccessOrderRequest {
   packageInfoList: Array<{
     packageCode: string;
     count: number;
-    /** Price in provider units (price field from package, multiplied by count) */
-    price: number;
+    /** Number of days for daily plans (dataType=2), 1-365 */
+    periodNum?: number;
   }>;
 }
 
@@ -122,6 +122,10 @@ export interface EsimAccessEsimProfile {
   orderUsage: number;
   expiredTime?: string;     // ISO timestamp
   orderTime?: string;
+  /** Android quick install URL (v2.5+) */
+  androidInstallUrl?: string;
+  /** eSIM state: Active, Suspended, Deactivated */
+  state?: string;
 }
 
 // ─── /esim/usage/query ───────────────────────────────────────────────────────
@@ -156,6 +160,37 @@ export interface EsimAccessCancelRequest {
   iccid?: string;
 }
 
+// ─── /esim/suspend ────────────────────────────────────────────────────────────
+
+export interface EsimAccessSuspendRequest {
+  esimTranNo?: string;
+  iccid?: string;
+}
+
+// ─── /esim/resume ────────────────────────────────────────────────────────────
+
+export interface EsimAccessResumeRequest {
+  esimTranNo?: string;
+  iccid?: string;
+}
+
+// ─── /esim/compatible ────────────────────────────────────────────────────────
+
+export interface EsimAccessCompatibleRequest {
+  iccid: string;
+}
+
+export interface EsimAccessCompatibleResponse extends EsimAccessResponse<{
+  compatibleList: Array<{
+    packageCode: string;
+    name: string;
+    volume: number;
+    price: number;
+    duration: number;
+    durationUnit: string;
+  }>;
+}> {}
+
 // ─── /balance/query ──────────────────────────────────────────────────────────
 
 export interface EsimAccessBalanceResponse extends EsimAccessResponse<{
@@ -173,4 +208,5 @@ export interface EsimAccessBalanceResponse extends EsimAccessResponse<{
 export type EsimAccessWebhookEvent =
   | { notifyType: 'ORDER_STATUS'; obj: { orderNo: string; orderStatus: string; transactionId: string } }
   | { notifyType: 'ESIM_STATUS'; obj: { iccid: string; esimStatus: string } }
-  | { notifyType: 'DATA_USAGE'; obj: { iccid: string; totalVolume: number; orderUsage: number } };
+  | { notifyType: 'DATA_USAGE'; obj: { iccid: string; totalVolume: number; orderUsage: number } }
+  | { notifyType: 'VALIDITY_USAGE'; obj: { iccid: string; expiredTime: string; remainingHours: number } };

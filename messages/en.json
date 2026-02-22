@@ -85,7 +85,9 @@
     "total": "total",
     "days": "days",
     "gb": "GB",
-    "mb": "MB"
+    "mb": "MB",
+    "selectDays": "Select days",
+    "day": "day"
   },
   "package": {
     "addToCart": "Add to Cart",
@@ -248,5 +250,12 @@
     "delete": "Delete",
     "edit": "Edit",
     "view": "View"
+  },
+  "exitPopup": {
+    "title": "Wait! Don't leave yet!",
+    "subtitle": "Get 10% off your first order",
+    "description": "Use code WELCOME10 at checkout",
+    "button": "Get My 10% Discount",
+    "noThanks": "No thanks, I don't want a discount"
   }
 }

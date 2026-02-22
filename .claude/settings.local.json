@@ -17,7 +17,24 @@
       "Bash(npx tsc:*)",
       "Bash(ls:*)",
       "Bash(find:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm uninstall:*)",
+      "WebFetch(domain:docs.esimaccess.com)",
+      "WebFetch(domain:esimaccess.com)",
+      "Bash(npm run:*)",
+      "Bash(node:*)"
     ]
+  },
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server"],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "SUPABASE_ACCESS_TOKEN"
+      }
+    }
   }
 }

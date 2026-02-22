@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Wifi, Shield, Zap, Globe, Smartphone, QrCode, CreditCard, MapPin, Clock, CheckCircle, ChevronRight, Star } from 'lucide-react';
+import { ArrowRight, Wifi, Shield, Zap, Globe, Smartphone, QrCode, CreditCard, MapPin, Clock, CheckCircle, ChevronRight } from 'lucide-react';
 import { createSupabaseAdminClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
 import HeroAnimation from '@/components/hero/HeroAnimation';
@@ -52,16 +52,41 @@ interface FeaturedDestination {
 
 const getHomepageData = async () => {
   const supabase = createSupabaseAdminClient();
-  const { data } = await supabase
+  
+  // Get packages
+  const { data: packages } = await supabase
     .from('packages_cache')
     .select('country_code, country_name, retail_price_cents')
     .eq('is_active', true)
     .limit(5000);
 
-  if (!data) return { totalDestinations: 0, featured: [] };
+  // Get real stats from database
+  const { data: ordersData } = await supabase
+    .from('orders')
+    .select('id', { count: 'exact', head: true })
+    .in('status', ['paid', 'fulfilled', 'partially_fulfilled']);
+  
+  const { data: esimsData } = await supabase
+    .from('esims')
+    .select('id', { count: 'exact', head: true })
+    .eq('status', 'active');
+
+  if (!packages) return { 
+    totalDestinations: 0, 
+    featured: [],
+    totalOrders: 0,
+    activeEsims: 0,
+    minPrice: 0
+  };
 
   const countryMap = new Map<string, FeaturedDestination>();
-  for (const row of data) {
+  let minPrice = Infinity;
+  
+  for (const row of packages) {
+    if (row.retail_price_cents < minPrice) {
+      minPrice = row.retail_price_cents;
+    }
+    
     const existing = countryMap.get(row.country_code);
     if (!existing) {
       countryMap.set(row.country_code, {
@@ -79,15 +104,12 @@ const getHomepageData = async () => {
   }
 
   const all = Array.from(countryMap.values());
-  // Pick popular destinations with most plans, filtering out regions (codes > 2 chars) and explicit exclusions
   const sorted = all
     .filter(d => d.countryCode && d.countryCode.length === 2 && !['EU', 'NA', 'AS', 'SA', 'AF', 'OC', 'WW', 'IL'].includes(d.countryCode))
     .sort((a, b) => b.planCount - a.planCount);
 
-  // Start with top 8
   let featured = sorted.slice(0, 8);
 
-  // Ensure Turkey (TR) is included if available, replacing the last item if needed
   const trIndex = featured.findIndex(d => d.countryCode === 'TR');
   if (trIndex === -1) {
     const tr = sorted.find(d => d.countryCode === 'TR');
@@ -96,7 +118,13 @@ const getHomepageData = async () => {
     }
   }
 
-  return { totalDestinations: all.length, featured };
+  return { 
+    totalDestinations: all.length, 
+    featured,
+    totalOrders: ordersData?.length ?? 0,
+    activeEsims: esimsData?.length ?? 0,
+    minPrice: minPrice === Infinity ? 0 : minPrice
+  };
 };
 
 const STEPS = [
@@ -118,7 +146,7 @@ const COMPATIBLE_DEVICES = [
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-  const { totalDestinations, featured } = await getHomepageData();
+  const { totalDestinations, featured, totalOrders, activeEsims, minPrice } = await getHomepageData();
 
   return (
     <div className="min-h-screen">
@@ -179,24 +207,45 @@ export default async function HomePage({ params }: Props) {
       {/* ═══════════ TRUST BADGES ═══════════ */}
       <section className="bg-white border-b border-gray-100">
         <div className="container py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: Globe, value: `${totalDestinations}+`, label: t('home.hero.countriesCovered') },
-              { icon: Zap, value: 'Instant', label: 'QR Delivery' },
-              { icon: Shield, value: 'Secure', label: 'Secure Payments' },
-              { icon: Star, value: '4.9/5', label: 'Customer Rating' },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center shrink-0">
-                  <item.icon className="w-6 h-6 text-blue-600" />
+          {totalOrders >= 50 ? (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { icon: Globe, value: `${totalDestinations}+`, label: 'Destinations' },
+                { icon: Zap, value: `from $${(minPrice / 100).toFixed(0)}`, label: 'Starting at' },
+                { icon: Shield, value: `${totalOrders}+`, label: 'Happy Customers' },
+                { icon: Wifi, value: `${activeEsims}+`, label: 'eSIMs Delivered' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center shrink-0">
+                    <item.icon className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div className="select-none">
+                    <p className="font-bold text-gray-900">{item.value}</p>
+                    <p className="text-xs text-gray-500">{item.label}</p>
+                  </div>
                 </div>
-                <div className="select-none">
-                  <p className="font-bold text-gray-900">{item.value}</p>
-                  <p className="text-xs text-gray-500">{item.label}</p>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { icon: Globe, value: `${totalDestinations}+`, label: 'Destinations' },
+                { icon: Zap, value: minPrice > 0 ? `from $${(minPrice / 100).toFixed(0)}` : 'Instant', label: 'Starting at' },
+                { icon: Shield, value: 'Secure', label: 'Dodo Payments' },
+                { icon: Wifi, value: '24/7', label: 'Customer Support' },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center shrink-0">
+                    <item.icon className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="select-none">
+                    <p className="font-bold text-gray-900">{item.value}</p>
+                    <p className="text-xs text-gray-500">{item.label}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
+import { ExitIntentPopup } from './ExitIntentPopup';
 
 const CONSENT_KEY = 'gosimy-cookie-consent';
 
@@ -44,6 +45,8 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
+    <>
+      <ExitIntentPopup />
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-gray-200 shadow-lg">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
         <div className="flex-1 text-sm text-gray-600 pr-4">
@@ -78,5 +81,6 @@ export function CookieBanner() {
         </div>
       </div>
     </div>
+    </>
   );
 }

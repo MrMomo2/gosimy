@@ -1,0 +1,261 @@
+{
+  "nav": {
+    "shop": "Winkel",
+    "portal": "Mijn eSIMs",
+    "login": "Inloggen",
+    "logout": "Uitloggen",
+    "cart": "Winkelwagen",
+    "profile": "Accountinstellingen",
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen"
+  },
+  "home": {
+    "hero": {
+      "title": "Blijf overal verbonden",
+      "subtitle": "Directe eSIMs voor {count}+ landen. Geen contracten, geen roamingkosten.",
+      "cta": "Bekijk abonnementen",
+      "ctaSecondary": "Hoe het werkt",
+      "countriesCovered": "landen gedekt"
+    },
+    "featured": {
+      "title": "Populaire bestemmingen",
+      "subtitle": "Topkeuzes van onze reizigers",
+      "viewAll": "Bekijk alle {count}+ bestemmingen",
+      "fromPrice": "Vanaf $1.99"
+    },
+    "benefits": {
+      "title": "Waarom reizigers voor Gosimy kiezen",
+      "subtitle": "De slimste manier om verbonden te blijven tijdens het reizen",
+      "stayConnected": "Blijf verbonden",
+      "stayConnectedDesc": "Hoge in {count}+ landen. Geen gedoe meer met WiFi zoeken of lokale SIMs snelheid data kopen.",
+      "noHiddenFees": "Geen verborgen kosten",
+      "noHiddenFeesDesc": "Transparante prijzen. Geen contracten, geen verrassingen, geen roaming-nachtmerrie.",
+      "instantActivation": "Directe activering",
+      "instantActivationDesc": "Ontvang je eSIM QR-code per e-mail binnen enkele minuten. Direct activeren.",
+      "worksEverywhere": "Werkt overal",
+      "worksEverywhereDesc": "Compatibel met alle eSIM-ready apparaten. iPhone, Android, tablets en meer."
+    },
+    "howItWorks": {
+      "title": "Hoe het werkt",
+      "subtitle": "Verbind in 3 eenvoudige stappen",
+      "step1": {
+        "title": "Kies een abonnement",
+        "desc": "Selecteer je bestemming en dataplan"
+      },
+      "step2": {
+        "title": "Veilig betalen",
+        "desc": "Veilig afrekenen — kaart, Apple Pay of Google Pay"
+      },
+      "step3": {
+        "title": "Ontvang direct",
+        "desc": "Ontvang je eSIM QR-code per e-mail binnen enkele minuten"
+      },
+      "step4": {
+        "title": "Blijf verbonden",
+        "desc": "Scan en activeer — werkt op elk eSIM-compatibele apparaat"
+      }
+    },
+    "cta": {
+      "title": "Klaar om verbonden te reizen?",
+      "subtitle": "Sluit je aan bij duizenden reizigers die nooit meer zorgen hebben over roamingkosten.",
+      "button": "Bekijk eSIM-abonnementen"
+    },
+    "payments": {
+      "securePayments": "Veilige betalingen:"
+    },
+    "readyCta": "Klaar om verbonden te vliegen?"
+  },
+  "shop": {
+    "title": "Blader door eSIM-abonnementen",
+    "searchPlaceholder": "Zoek op land...",
+    "destinationsAvailable": "bestemmingen beschikbaar",
+    "noResults": "Geen bestemmingen gevonden",
+    "backToDestinations": "Terug naar bestemmingen",
+    "plansAvailable": "abonnementen beschikbaar",
+    "filters": {
+      "all": "Alle",
+      "europe": "Europa",
+      "asia": "Azië",
+      "americas": "Amerika",
+      "africa": "Afrika",
+      "oceania": "Oceanië",
+      "middleEast": "Midden-Oosten"
+    },
+    "perDay": "/dag",
+    "total": "totaal",
+    "days": "dagen",
+    "gb": "GB",
+    "mb": "MB",
+    "selectDays": "Selecteer dagen",
+    "day": "dag"
+  },
+  "package": {
+    "addToCart": "Toevoegen aan winkelwagen",
+    "added": "Toegevoegd",
+    "dailyPlan": "Dagelijks plan",
+    "unlimited": "Onbeperkt",
+    "volume": "Data",
+    "duration": "Duur",
+    "validity": "Geldigheid",
+    "coverage": "Dekking",
+    "networks": "Netwerken"
+  },
+  "cart": {
+    "title": "Je winkelwagen",
+    "empty": "Je winkelwagen is leeg",
+    "emptyDesc": "Voeg eSIM-abonnementen toe om te beginnen",
+    "continueShopping": "Verder winkelen",
+    "couponPlaceholder": "Couponcode",
+    "apply": "Toepassen",
+    "remove": "Verwijderen",
+    "subtotal": "Subtotaal",
+    "discount": "Korting",
+    "total": "Totaal",
+    "taxesNote": "Belastingen worden berekend bij het afrekenen op basis van je locatie",
+    "checkout": "Naar kassa",
+    "redirecting": "Doorverwijzen...",
+    "items": "artikelen"
+  },
+  "checkout": {
+    "success": {
+      "title": "Betaling geslaagd!",
+      "subtitle": "Je eSIM wordt voorbereid",
+      "desc": "Je ontvangt je eSIM QR-code binnen enkele minuten per e-mail. Je kunt je bestelling ook volgen in het portaal.",
+      "viewOrder": "Bekijk mijn eSIMs",
+      "continueShopping": "Verder winkelen"
+    },
+    "cancel": {
+      "title": "Betaling geannuleerd",
+      "subtitle": "Je bestelling is niet voltooid",
+      "desc": "Er zijn geen kosten in rekening gebracht. Je kunt het opnieuw proberen — je winkelwagenartikelen zijn nog opgeslagen.",
+      "cartSaved": "Je winkelwagenartikelen zijn opgeslagen",
+      "tryAgain": "Opnieuw proberen",
+      "backHome": "Terug naar home",
+      "continueShopping": "Verder winkelen"
+    }
+  },
+  "portal": {
+    "title": "Mijn eSIMs",
+    "subtitle": "Beheer je actieve eSIM-abonnementen",
+    "noEsims": "Nog geen eSIMs",
+    "noEsimsDesc": "Koop een eSIM-abonnement om te beginnen",
+    "shopCta": "Winkel eSIM-abonnementen",
+    "orderDetails": "Bestelgegevens",
+    "status": {
+      "pending": "In behandeling",
+      "provisioning": "Wordt voorbereid",
+      "active": "Actief",
+      "exhausted": "Data gebruikt",
+      "expired": "Verlopen",
+      "cancelled": "Geannuleerd",
+      "failed": "Mislukt"
+    },
+    "iccid": "ICCID",
+    "activationCode": "Activeringscode",
+    "dataUsed": "Data gebruikt",
+    "expires": "Verloopt",
+    "scanQr": "Scan QR-code",
+    "copyCode": "Code kopiëren",
+    "copied": "Gekopieerd!",
+    "showQr": "Toon QR-code",
+    "hideQr": "Verberg QR-code"
+  },
+  "profile": {
+    "title": "Profiel",
+    "subtitle": "Beheer je accountinstellingen",
+    "email": "E-mail",
+    "displayName": "Weergavenaam",
+    "namePlaceholder": "Voer je naam in",
+    "emailManaged": "E-mail wordt beheerd door je login-provider",
+    "save": "Wijzigingen opslaan",
+    "saved": "Profiel succesvol bijgewerkt!",
+    "changePassword": "Wachtwoord wijzigen",
+    "currentPassword": "Huidig wachtwoord",
+    "newPassword": "Nieuw wachtwoord",
+    "confirmPassword": "Bevestig nieuw wachtwoord",
+    "passwordMismatch": "Wachtwoorden komen niet overeen",
+    "passwordTooShort": "Wachtwoord moet minimaal 6 tekens zijn",
+    "passwordChanged": "Wachtwoord succesvol bijgewerkt!",
+    "passwordOAuthNotice": "Je wachtwoord wordt beheerd door je {provider} account. Om het te wijzigen, pas je je accountinstellingen daar aan.",
+    "yourData": "Je gegevens",
+    "downloadData": "Download mijn gegevens",
+    "downloadDataDesc": "Download een kopie van al je persoonlijke gegevens inclusief bestellingen en eSIMs als JSON-bestand.",
+    "dangerZone": "Gevarenzone",
+    "deleteAccount": "Account verwijderen",
+    "deleteAccountDesc": "Verwijder je account permanent en anonimiseer je bestelgeschiedenis. Dit kan niet ongedaan worden gemaakt.",
+    "deleteAccountWarning": "Dit verwijdert je account permanent. Je bestelgeschiedenis wordt geanonimiseerd maar bewaard voor juridische doeleinden.",
+    "deleteAccountConfirmLabel": "Typ je e-mailadres om te bevestigen:",
+    "deleteAccountConfirmButton": "Account permanent verwijderen",
+    "deleteActiveOrdersError": "Je hebt bestellingen die momenteel worden verwerkt. Wacht tot de afhandeling is voltooid."
+  },
+  "auth": {
+    "login": {
+      "title": "Welkom terug",
+      "subtitle": "Log in om je eSIMs te beheren",
+      "signUpTitle": "Account aanmaken",
+      "signUpSubtitle": "Registreer om je eSIMs te beheren en je bestellingen te volgen",
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "signIn": "Inloggen",
+      "signUp": "Registreren",
+      "forgotPassword": "Wachtwoord vergeten?",
+      "orContinueWith": "Of ga door met e-mail",
+      "google": "Doorgaan met Google",
+      "noAccount": "Heb je geen account?",
+      "hasAccount": "Heb je al een account?",
+      "signUpLink": "Registreren",
+      "signInLink": "Inloggen"
+    }
+  },
+  "search": {
+    "placeholder": "Waar reis je naartoe?",
+    "popular": "Populaire bestemmingen",
+    "destinations": "Bestemmingen",
+    "noResults": "Geen bestemmingen gevonden",
+    "searchAll": "Druk op Enter om alle abonnementen te zoeken"
+  },
+  "cookie": {
+    "title": "We gebruiken cookies",
+    "message": "We gebruiken strikt noodzakelijke cookies voor authenticatie en winkelwagenopslag. Met je toestemming verzamelen we ook anonieme analytics om onze service te verbeteren. Zie ons",
+    "privacyLink": "Privacybeleid",
+    "accept": "Alles accepteren",
+    "decline": "Weigeren"
+  },
+  "footer": {
+    "tagline": "Directe eSIMs voor reizigers wereldwijd",
+    "poweredBy": "Prijzen in USD · Powered by eSIM Access",
+    "browsePlans": "Bekijk abonnementen",
+    "europeEsims": "Europa eSIMs",
+    "asiaEsims": "Azië eSIMs",
+    "americasEsims": "Amerika eSIMs",
+    "links": {
+      "shop": "Winkel",
+      "portal": "Portaal",
+      "privacy": "Privacybeleid",
+      "terms": "Servicevoorwaarden",
+      "contact": "Contact"
+    },
+    "copyright": "© {year} Gosimy. Alle rechten voorbehouden."
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Er is iets misgegaan",
+    "retry": "Opnieuw proberen",
+    "close": "Sluiten",
+    "cancel": "Annuleren",
+    "confirm": "Bevestigen",
+    "back": "Terug",
+    "next": "Volgende",
+    "save": "Opslaan",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "view": "Bekijken"
+  },
+  "exitPopup": {
+    "title": "Wacht! Ga nog niet weg!",
+    "subtitle": "Krijg 10% korting op je eerste bestelling",
+    "description": "Gebruik code WELCOME10 bij het afrekenen",
+    "button": "Mijn 10% korting krijgen",
+    "noThanks": "Nee bedankt, ik wil geen korting"
+  }
+}

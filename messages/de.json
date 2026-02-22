@@ -248,5 +248,12 @@
     "delete": "Löschen",
     "edit": "Bearbeiten",
     "view": "Ansehen"
+  },
+  "exitPopup": {
+    "title": "Warte! Geh noch nicht!",
+    "subtitle": "Erhalte 10% Rabatt auf deine erste Bestellung",
+    "description": "Verwende den Code WELCOME10 an der Kasse",
+    "button": "Meinen 10% Rabatt sichern",
+    "noThanks": "Nein danke, ich will keinen Rabatt"
   }
 }

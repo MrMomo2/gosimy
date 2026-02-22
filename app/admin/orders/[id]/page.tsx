@@ -184,6 +184,19 @@ export default async function OrderDetailsPage({ params }: Props) {
                                     View in Dodo <ExternalLink className="w-3 h-3" />
                                 </a>
                             </div>
+                            {order.payment_invoice_id && (
+                                <div>
+                                    <p className="text-gray-500 mb-1">Invoice</p>
+                                    <a
+                                        href={order.payment_invoice_id}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1 text-blue-600 hover:underline"
+                                    >
+                                        View Invoice <ExternalLink className="w-3 h-3" />
+                                    </a>
+                                </div>
+                            )}
 
                             <div className="pt-4 space-y-2">
                                 {order.status === 'failed' && (
