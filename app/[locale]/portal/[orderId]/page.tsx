@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Package } from 'lucide-react';
 import { createSupabaseServerClient, createSupabaseAdminClient } from '@/lib/supabase/server';
@@ -14,6 +14,10 @@ export default async function OrderDetailPage({ params }: Props) {
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
 
+  if (!user) {
+    redirect(`/${locale}/auth/login`);
+  }
+
   const adminClient = createSupabaseAdminClient();
 
   // Fetch the order and verify ownership
@@ -21,7 +25,7 @@ export default async function OrderDetailPage({ params }: Props) {
     .from('orders')
     .select('*, order_items(*, esims(*))')
     .eq('id', orderId)
-    .eq('user_id', user!.id)
+    .eq('user_id', user.id)
     .single();
 
   if (!order) notFound();
