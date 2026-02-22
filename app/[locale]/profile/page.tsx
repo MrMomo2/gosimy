@@ -26,6 +26,7 @@ export default async function ProfilePage({ params }: Props) {
             email: user.email ?? '',
             fullName: user.user_metadata?.full_name || user.user_metadata?.name || '',
             avatarUrl: user.user_metadata?.avatar_url || null,
+            provider: (user.app_metadata?.provider as string) ?? 'email',
           }}
         />
       </div>

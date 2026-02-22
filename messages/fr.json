@@ -166,7 +166,25 @@
     "namePlaceholder": "Entrez votre nom",
     "emailManaged": "L'email est géré par votre fournisseur de connexion",
     "save": "Enregistrer les modifications",
-    "saved": "Profil mis à jour avec succès !"
+    "saved": "Profil mis à jour avec succès !",
+    "changePassword": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+    "passwordChanged": "Mot de passe mis à jour avec succès !",
+    "passwordOAuthNotice": "Votre mot de passe est géré par votre compte {provider}. Mettez-le à jour dans les paramètres de ce compte.",
+    "yourData": "Mes données",
+    "downloadData": "Télécharger mes données",
+    "downloadDataDesc": "Téléchargez une copie de toutes vos données personnelles incluant commandes et eSIMs en fichier JSON.",
+    "dangerZone": "Zone de danger",
+    "deleteAccount": "Supprimer le compte",
+    "deleteAccountDesc": "Supprimez définitivement votre compte et anonymisez votre historique de commandes. Cette action est irréversible.",
+    "deleteAccountWarning": "Votre compte sera définitivement supprimé. Votre historique de commandes sera anonymisé mais conservé pour des raisons légales.",
+    "deleteAccountConfirmLabel": "Saisissez votre adresse e-mail pour confirmer :",
+    "deleteAccountConfirmButton": "Supprimer définitivement le compte",
+    "deleteActiveOrdersError": "Vous avez des commandes en cours de traitement. Veuillez attendre la fin de la livraison."
   },
   "auth": {
     "login": {

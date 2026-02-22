@@ -166,7 +166,25 @@
     "namePlaceholder": "Geben Sie Ihren Namen ein",
     "emailManaged": "E-Mail wird von Ihrem Login-Anbieter verwaltet",
     "save": "Änderungen speichern",
-    "saved": "Profil erfolgreich aktualisiert!"
+    "saved": "Profil erfolgreich aktualisiert!",
+    "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Neues Passwort bestätigen",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "passwordTooShort": "Passwort muss mindestens 6 Zeichen lang sein",
+    "passwordChanged": "Passwort erfolgreich aktualisiert!",
+    "passwordOAuthNotice": "Ihr Passwort wird von Ihrem {provider}-Konto verwaltet. Aktualisieren Sie es dort in den Kontoeinstellungen.",
+    "yourData": "Meine Daten",
+    "downloadData": "Meine Daten herunterladen",
+    "downloadDataDesc": "Laden Sie eine Kopie aller Ihrer persönlichen Daten einschließlich Bestellungen und eSIMs als JSON-Datei herunter.",
+    "dangerZone": "Gefahrenzone",
+    "deleteAccount": "Konto löschen",
+    "deleteAccountDesc": "Konto dauerhaft löschen und Bestellhistorie anonymisieren. Dies kann nicht rückgängig gemacht werden.",
+    "deleteAccountWarning": "Ihr Konto wird dauerhaft gelöscht. Ihre Bestellhistorie wird anonymisiert, aber aus rechtlichen Gründen aufbewahrt.",
+    "deleteAccountConfirmLabel": "Geben Sie Ihre E-Mail-Adresse zur Bestätigung ein:",
+    "deleteAccountConfirmButton": "Konto dauerhaft löschen",
+    "deleteActiveOrdersError": "Sie haben Bestellungen, die gerade bearbeitet werden. Bitte warten Sie auf den Abschluss der Lieferung."
   },
   "auth": {
     "login": {

@@ -166,7 +166,25 @@
     "namePlaceholder": "Enter your name",
     "emailManaged": "Email is managed by your login provider",
     "save": "Save Changes",
-    "saved": "Profile updated successfully!"
+    "saved": "Profile updated successfully!",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "passwordChanged": "Password updated successfully!",
+    "passwordOAuthNotice": "Your password is managed by your {provider} account. To change it, update your account settings there.",
+    "yourData": "Your Data",
+    "downloadData": "Download My Data",
+    "downloadDataDesc": "Download a copy of all your personal data including orders and eSIMs as a JSON file.",
+    "dangerZone": "Danger Zone",
+    "deleteAccount": "Delete Account",
+    "deleteAccountDesc": "Permanently delete your account and anonymise your order history. This cannot be undone.",
+    "deleteAccountWarning": "This will permanently delete your account. Your order history will be anonymised but retained for legal purposes.",
+    "deleteAccountConfirmLabel": "Type your email address to confirm:",
+    "deleteAccountConfirmButton": "Permanently Delete Account",
+    "deleteActiveOrdersError": "You have orders currently being processed. Please wait for fulfillment to complete."
   },
   "auth": {
     "login": {

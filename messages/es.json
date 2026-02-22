@@ -166,7 +166,25 @@
     "namePlaceholder": "Ingresa tu nombre",
     "emailManaged": "El email es gestionado por tu proveedor de inicio de sesión",
     "save": "Guardar cambios",
-    "saved": "¡Perfil actualizado con éxito!"
+    "saved": "¡Perfil actualizado con éxito!",
+    "changePassword": "Cambiar contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "passwordTooShort": "La contraseña debe tener al menos 6 caracteres",
+    "passwordChanged": "¡Contraseña actualizada con éxito!",
+    "passwordOAuthNotice": "Tu contraseña es gestionada por tu cuenta de {provider}. Actualízala en la configuración de esa cuenta.",
+    "yourData": "Mis datos",
+    "downloadData": "Descargar mis datos",
+    "downloadDataDesc": "Descarga una copia de todos tus datos personales incluyendo pedidos y eSIMs como archivo JSON.",
+    "dangerZone": "Zona de peligro",
+    "deleteAccount": "Eliminar cuenta",
+    "deleteAccountDesc": "Elimina permanentemente tu cuenta y anonimiza tu historial de pedidos. Esto no se puede deshacer.",
+    "deleteAccountWarning": "Tu cuenta será eliminada permanentemente. Tu historial de pedidos será anonimizado pero conservado por razones legales.",
+    "deleteAccountConfirmLabel": "Escribe tu correo electrónico para confirmar:",
+    "deleteAccountConfirmButton": "Eliminar cuenta permanentemente",
+    "deleteActiveOrdersError": "Tienes pedidos que se están procesando actualmente. Por favor espera a que se complete la entrega."
   },
   "auth": {
     "login": {
