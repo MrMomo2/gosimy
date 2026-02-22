@@ -11,8 +11,8 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always',
 });
 
-// Set to true to enable Maintenance / Coming Soon mode
-const IS_MAINTENANCE_MODE = true;
+// Controlled via MAINTENANCE_MODE env var ('true' / 'false')
+const IS_MAINTENANCE_MODE = process.env.MAINTENANCE_MODE === 'true';
 
 export default async function proxy(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
