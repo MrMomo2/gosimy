@@ -72,6 +72,11 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={inter.className} data-scroll-behavior="smooth">
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta property="og:image" content={`${APP_URL}/api/og`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Gosimy — Instant eSIMs for Travelers" />
+        <meta name="twitter:image" content={`${APP_URL}/api/og`} />
         {alternates.map(({ hrefLang, href }) => (
           <link key={hrefLang} rel="alternate" hrefLang={hrefLang} href={href} />
         ))}
