@@ -1,4 +1,3 @@
-import { get } from '@vercel/edge-config';
 import createMiddleware from 'next-intl/middleware';
 import { type NextRequest, NextResponse } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
@@ -12,17 +11,8 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always',
 });
 
-// Reads maintenance_mode from Vercel Edge Config (instant, no redeploy needed).
-// Falls back to MAINTENANCE_MODE env var for local development.
-async function getMaintenanceMode(): Promise<boolean> {
-  try {
-    const value = await get<boolean>('maintenance_mode');
-    if (value !== undefined) return value;
-  } catch {
-    // Edge Config not available (local dev) — use env var fallback
-  }
-  return process.env.MAINTENANCE_MODE === 'true';
-}
+// Controlled via MAINTENANCE_MODE env var in Vercel Dashboard ('true' / 'false')
+const isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true';
 
 export default async function proxy(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
@@ -37,7 +27,6 @@ export default async function proxy(request: NextRequest): Promise<NextResponse>
   const isApi = pathname.startsWith('/api/');
   const isMaintenancePath = pathname.match(/^\/([a-z]{2}\/)?maintenance$/);
 
-  const isMaintenanceMode = await getMaintenanceMode();
 
   // If maintenance is enabled, user has no bypass, it's not an API call, and not already on the maintenance page
   if (isMaintenanceMode && !hasBypassCookie && !isApi && !isMaintenancePath) {
